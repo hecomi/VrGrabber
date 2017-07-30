@@ -28,4 +28,6 @@ sysinfo.txt
 /Assets/AssetStoreTools*
 /Assets/Extensions*
 /Assets/OVR
+/Assets/OvrAvatar
+/Assets/Plugins
 /*.log
