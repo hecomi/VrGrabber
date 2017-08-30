@@ -110,9 +110,9 @@ public class VrgGrabbable : MonoBehaviour
 
     public void OnReleased(VrgGrabber grabber)
     {
-        onReleased.Invoke();
-
         grabbers_.Remove(grabber);
+
+        onReleased.Invoke();
     }
 
     public void OnGrabClicked(VrgGrabber grabber)
