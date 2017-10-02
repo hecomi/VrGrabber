@@ -2,51 +2,45 @@
 
 namespace VrGrabber
 {
+    public class Device {
+        static IDevice _instance;
+        public static IDevice instance {
+            get {
+                if (_instance == null) {
+#if !UNITY_WSA
+                    _instance = new VrgOculusTouchDevice();
+#elif UNITY_WSA
+                    _instance = new VrgWinMRMotionControllerDevice();
+#else
+#error "Not implemented."
+#endif
+                }
+                return _instance;
+            }
+        }
 
-public static class Device
-{
-    public enum ControllerSide
-    {
-        Left,
-        Right,
+        public Vector3 GetLocalPosition(ControllerSide side) {
+            return _instance.GetLocalPosition(side);
+        }
+
+        public Quaternion GetLocalRotation(ControllerSide side) {
+            return _instance.GetLocalRotation(side);
+        }
+
+        public float GetHold(ControllerSide side) {
+            return _instance.GetHold(side);
+        }
+
+        public bool GetHover(ControllerSide side) {
+            return _instance.GetHover(side);
+        }
+
+        public bool GetClick(ControllerSide side) {
+            return _instance.GetClick(side);
+        }
+
+        public Vector2 GetCoord(ControllerSide side) {
+            return _instance.GetCoord(side);
+        }
     }
-
-    private static OVRInput.Controller GetOVRController(ControllerSide side)
-    {
-        return (side == ControllerSide.Left) ?
-            OVRInput.Controller.LTouch :
-            OVRInput.Controller.RTouch;
-    }
-
-    public static Vector3 GetLocalPosition(ControllerSide side)
-    { 
-        return OVRInput.GetLocalControllerPosition(GetOVRController(side));
-    }
-
-    public static Quaternion GetLocalRotation(ControllerSide side)
-    { 
-        return OVRInput.GetLocalControllerRotation(GetOVRController(side));
-    }
-
-    public static float GetHold(ControllerSide side)
-    { 
-        return OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, GetOVRController(side));
-    }
-
-    public static bool GetHover(ControllerSide side)
-    { 
-        return OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, GetOVRController(side));
-    }
-
-    public static bool GetClick(ControllerSide side)
-    { 
-        return OVRInput.Get(OVRInput.Button.PrimaryThumbstick, GetOVRController(side));
-    }
-
-    public static Vector2 GetCoord(ControllerSide side)
-    { 
-        return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, GetOVRController(side));
-    }
-}
-
 }
