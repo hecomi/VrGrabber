@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.VR;
+using UnityEngine.XR;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
@@ -75,7 +75,7 @@ public class VrgGrabbable : MonoBehaviour
     {
         get 
         {
-            var vrLocalPos = InputTracking.GetLocalPosition(VRNode.CenterEye);
+            var vrLocalPos = InputTracking.GetLocalPosition(XRNode.CenterEye);
             var vrWorldPos = Camera.main.cameraToWorldMatrix.MultiplyPoint(vrLocalPos);
             return vrWorldPos;
         }
