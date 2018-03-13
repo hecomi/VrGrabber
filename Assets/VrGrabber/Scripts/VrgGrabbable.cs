@@ -10,6 +10,8 @@ namespace VrGrabber
 public class VrgGrabbable : MonoBehaviour 
 {
     public bool isScalable = true;
+    public bool avoidIntersection = false;
+    public float maxSpeed = 10f;
 
     public UnityEvent onGrabbed = new UnityEvent();
     public UnityEvent onReleased = new UnityEvent();
@@ -43,14 +45,14 @@ public class VrgGrabbable : MonoBehaviour
 
     public Vector3 position
     {
-        get { return rigidbody_.position; }
-        set { rigidbody_.MovePosition(value); }
+        get { return rigidbody.position; }
+        set { SetPosition(value); }
     }
 
     public Quaternion rotation
     {
-        get { return rigidbody_.rotation; }
-        set { rigidbody_.MoveRotation(value); }
+        get { return rigidbody.rotation; }
+        set { SetRotation(value); }
     }
 
     public Vector3 scale
@@ -61,14 +63,14 @@ public class VrgGrabbable : MonoBehaviour
 
     public Vector3 velocity
     {
-        get { return rigidbody_.velocity; }
-        set { rigidbody_.velocity = value; }
+        get { return rigidbody.velocity; }
+        set { rigidbody.velocity = value; }
     }
 
     public Vector3 angularVelocity
     {
-        get { return rigidbody_.angularVelocity; }
-        set { rigidbody_.angularVelocity = value; }
+        get { return rigidbody.angularVelocity; }
+        set { rigidbody.angularVelocity = value; }
     }
 
     private Vector3 vrWorldPos
@@ -96,6 +98,14 @@ public class VrgGrabbable : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (isGrabbed && rigidbody.useGravity && !rigidbody.isKinematic)
+        {
+            rigidbody.AddForce(-Physics.gravity);
+        }
+    }
+
     public int OnGrabbed(VrgGrabber grabber)
     {
         grabbers_.Add(grabber);
@@ -120,6 +130,44 @@ public class VrgGrabbable : MonoBehaviour
         if (grabClickCooldown_ > 0f) return;
         onGrabClicked.Invoke();
         grabClickCooldown_ = 0.1f;
+    }
+
+    void SetPosition(Vector3 dest)
+    {
+        if (avoidIntersection)
+        {
+            var v = (dest - position) / Time.fixedUnscaledDeltaTime;
+            if (v.magnitude > maxSpeed)
+            {
+                v = v.normalized * maxSpeed;
+            }
+            rigidbody.velocity = v;
+        }
+        else
+        {
+            rigidbody.MovePosition(dest);
+        }
+    }
+
+    void SetRotation(Quaternion dest)
+    {
+        /*
+        if (avoidIntersection)
+        {
+            var dRot = dest * Quaternion.Inverse(rotation);
+            var dEuler = dRot.eulerAngles;
+            if (dEuler.x > 180) dEuler.x -= 360;
+            if (dEuler.y > 180) dEuler.y -= 360;
+            if (dEuler.z > 180) dEuler.z -= 360;
+            var w = dEuler / Time.fixedUnscaledDeltaTime;
+            rigidbody.angularVelocity = (w - rigidbody.angularVelocity) * 0.01f;
+        }
+        else
+        {
+            rigidbody.MoveRotation(dest);
+        }
+        */
+        rigidbody.MoveRotation(dest);
     }
 }
 

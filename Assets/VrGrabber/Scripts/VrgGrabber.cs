@@ -294,7 +294,10 @@ public class VrgGrabber : MonoBehaviour
         grabInfo_.initGrabbableToGrabMat = grabbable.transform.worldToLocalMatrix * grabMat;
         grabInfo_.isKinematic = grabbable.rigidbody.isKinematic;
 
-        grabbable.rigidbody.isKinematic = true;
+        if (!grabbable.avoidIntersection)
+        {
+            grabbable.rigidbody.isKinematic = true;
+        }
 
         if (grabbable.isGrabbed)
         {
@@ -383,6 +386,7 @@ public class VrgGrabber : MonoBehaviour
         var grabbable = grabInfo_.grabbable;
 
         Assert.IsTrue(grabbable.isGrabbed);
+
         grabbable.velocity = grabInfo_.velocity.average;
         grabbable.OnReleased(this);
 
