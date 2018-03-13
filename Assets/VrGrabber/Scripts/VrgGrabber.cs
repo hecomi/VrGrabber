@@ -15,16 +15,16 @@ public class VrgGrabber : MonoBehaviour
     const float maxGrabSmoothDist = 2f;
     const float minGrabSmoothFilter = 0.15f;
 
-    public Device.ControllerSide side = Device.ControllerSide.Left;
+    public ControllerSide side = ControllerSide.Left;
 
     public bool isLeft
     {
-        get { return side == Device.ControllerSide.Left; }
+        get { return side == ControllerSide.Left; }
     }
 
     public bool isRight
     {
-        get { return side == Device.ControllerSide.Right; }
+        get { return side == ControllerSide.Right; }
     }
 
     [SerializeField]
@@ -246,14 +246,14 @@ public class VrgGrabber : MonoBehaviour
 
     void UpdateTransform()
     {
-        transform.localPosition = Device.GetLocalPosition(side);
-        transform.localRotation = Device.GetLocalRotation(side);
+        transform.localPosition = Device.instance.GetLocalPosition(side);
+        transform.localRotation = Device.instance.GetLocalRotation(side);
     }
 
     void UpdateInput()
     {
         var preHoldInput = holdInput_;
-        holdInput_ = Device.GetHold(side);
+        holdInput_ = Device.instance.GetHold(side);
         isHoldStart_ = (holdInput_ >= grabBeginThreshold) && (preHoldInput < grabBeginThreshold);
         isHoleEnd_ = (holdInput_ <= grabEndThreshold) && (preHoldInput > grabEndThreshold);
     }
@@ -413,7 +413,7 @@ public class VrgGrabber : MonoBehaviour
 
     void FixedUpdateGrabbingObject()
     {
-        if (Device.GetClick(side))
+        if (Device.instance.GetClick(side))
         {
             grabInfo_.grabbable.OnGrabClicked(this);
         }
@@ -432,7 +432,7 @@ public class VrgGrabber : MonoBehaviour
     {
         var grabbable = grabInfo_.grabbable;
 
-        var stickY = Device.GetCoord(side).y;
+        var stickY = Device.instance.GetCoord(side).y;
         var stickMove = stickY * stickMoveSpeed;
         var stickMoveFilter = stickY > Mathf.Epsilon ? 0.1f : 0.3f;
         grabInfo_.stickMove += (stickMove - grabInfo_.stickMove) * stickMoveFilter;
