@@ -436,13 +436,16 @@ public class VrgGrabber : MonoBehaviour
         var stickMove = stickY * stickMoveSpeed;
         var stickMoveFilter = stickY > Mathf.Epsilon ? 0.1f : 0.3f;
         grabInfo_.stickMove += (stickMove - grabInfo_.stickMove) * stickMoveFilter;
-        grabInfo_.distance = Mathf.Clamp(grabInfo_.distance + grabInfo_.stickMove, 0f, maxGrabDistance);
 
-        var actualDistance = (grabbable.position - gripTransform.position).magnitude;
-        if (grabInfo_.distance - actualDistance > Mathf.Epsilon)
+        var dist = Mathf.Clamp(grabInfo_.distance + grabInfo_.stickMove, 0f, maxGrabDistance);
+        var actualDist = (targetPos - gripTransform.position).magnitude;
+        var deltaDist = dist - actualDist;
+        var threshDist = Mathf.Max(dist * 0.1f, 0.1f);
+        if (Mathf.Abs(deltaDist) > threshDist)
         {
-            grabInfo_.distance = actualDistance;
+            dist = Mathf.Lerp(grabInfo_.distance, actualDist, 0.05f);
         }
+        grabInfo_.distance = dist;
 
         var mat = grabInfo_.gripToGrabbableMat;
         var pos = mat.GetPosition();
