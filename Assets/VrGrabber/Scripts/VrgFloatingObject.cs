@@ -14,8 +14,8 @@ public class VrgFloatingObject : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     float rotationDamping = 0.95f;
 
-	void Awake() 
-	{
+    void Awake() 
+    {
         rigidbody_ = GetComponent<Rigidbody>();
     }
 
@@ -23,13 +23,13 @@ public class VrgFloatingObject : MonoBehaviour
     {
         rigidbody_.velocity = Vector3.zero;
         rigidbody_.angularVelocity = Vector3.zero;
-	}
-	
-	void Update() 
-	{
+    }
+    
+    void Update() 
+    {
         rigidbody_.velocity *= moveDamping;
         rigidbody_.angularVelocity *= rotationDamping;
-	}
+    }
 }
 
 }
