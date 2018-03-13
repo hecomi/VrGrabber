@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_WSA
+using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.WSA.Input;
 
@@ -96,3 +97,4 @@ public class VrgWinMRMotionControllerDevice : IDevice
 }
 
 }
+#endif
