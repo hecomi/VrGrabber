@@ -33,7 +33,8 @@ public class VrgTargetLine : MonoBehaviour
         var to = grabber_.targetPos - startPos;
 
         var d = to.magnitude;
-        if (d < Mathf.Epsilon) {
+        if (d < Mathf.Epsilon) 
+        {
             line_.enabled = false;
             return;
         }
