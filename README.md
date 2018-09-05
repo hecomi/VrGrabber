@@ -1,17 +1,16 @@
-VrGrabber
+VrGrabberGo
 =========
 
-**VrGrabber** is a VR grabber components for Unity.
+**VrGrabberGo** is a Unity components for Oculus Go.
 
--   Both-hands interaction (move, rotate, and scale)
--   Z-distance control by thumb sticks
--   Connect objects with a curved line
+-   interaction (currently move only)
+-   Z-distance control by touch pad
+
 
 ![VrGrabber Image 1](https://raw.githubusercontent.com/wiki/hecomi/VrGrabber/grabber1.PNG)
 ![VrGrabber Image 2](https://raw.githubusercontent.com/wiki/hecomi/VrGrabber/grabber2.PNG)
 ![VrGrabber Image 3](https://raw.githubusercontent.com/wiki/hecomi/VrGrabber/grabber3.PNG)
 
--   Currently only Oculus SDK is supported (OpenVR will be supported soon).
 
 Demo
 ----
@@ -21,9 +20,9 @@ Demo
 Setup
 -------
 
-1.  Download the latest *.unitypackage* from [Release](https://github.com/hecomi/VrGrabber/releases) page.
+1.  Download the latest *.unitypackage* from [Release](https://github.com/ryokosaka/VrGrabberGo/releases) page.
 2.  Import it into your project.
-3.  Add `Vrg Left Grabber` and `Vrg Right Grabber` from *VrGrabber > Prefabs*
+3.  Add `Vrg Left Grabber` or `Vrg Right Grabber` from *VrGrabber > Prefabs*
     to `TrackingSpace` under `OVRCameraRig`.
 
 License
