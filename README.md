@@ -7,10 +7,8 @@ VrGrabberGo is the mod of hecomi's VrGrabber.
 -   Grab and release by trigger button
 -   Z-distance control by touch pad
 
-
-![VrGrabberGo Image 1](https://ryokosaka.github.io/image/vrgrabbergo/vrgrabbergo1.jpg)
-![VrGrabberGo Image 2](https://ryokosaka.github.io/image/vrgrabbergo/vrgrabbergo2.jpg)
-
+![image1](https://raw.githubusercontent.com/RyoKosaka/ryokosaka.github.io/master/image/vrgrabbergo/vrgrabbergo1.jpg)
+![image2](https://raw.githubusercontent.com/RyoKosaka/ryokosaka.github.io/master/image/vrgrabbergo/vrgrabbergo2.jpg)
 
 Demo
 ----
