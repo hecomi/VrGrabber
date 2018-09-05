@@ -27,8 +27,13 @@ namespace VrGrabber
             return _instance.GetLocalRotation(side);
         }
 
-        public float GetHold(ControllerSide side) {
+        public bool GetHold(ControllerSide side) {
             return _instance.GetHold(side);
+        }
+
+        public bool GetRelease(ControllerSide side)
+        {
+            return _instance.GetRelease(side);
         }
 
         public bool GetHover(ControllerSide side) {

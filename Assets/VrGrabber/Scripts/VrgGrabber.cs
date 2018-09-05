@@ -122,7 +122,8 @@ public class VrgGrabber : MonoBehaviour
     Dictionary<Collider, CandidateInfo> directGrabCandidates_ = new Dictionary<Collider, CandidateInfo>();
 
     RaycastHit targetHit_;
-    float holdInput_ = 0f;
+    bool holdInput_ = false;
+    bool releaseInput_ = false;
     bool isHoldStart_ = false;
     bool isHoleEnd_ = false;
     Vector3 preRayDirection_;
@@ -139,8 +140,8 @@ public class VrgGrabber : MonoBehaviour
 
     public Vector3 targetPos
     {
-        get 
-        { 
+        get
+        {
             if (isGrabbing)
             {
                 var grabMat = grabInfo_.grabbable.transform.localToWorldMatrix;
@@ -154,7 +155,7 @@ public class VrgGrabber : MonoBehaviour
             {
                 return gripTransform.position;
             }
-            else 
+            else
             {
                 return gripTransform.position + preRayDirection_ * maxGrabDistance;
             }
@@ -254,8 +255,11 @@ public class VrgGrabber : MonoBehaviour
     {
         var preHoldInput = holdInput_;
         holdInput_ = Device.instance.GetHold(side);
-        isHoldStart_ = (holdInput_ >= grabBeginThreshold) && (preHoldInput < grabBeginThreshold);
-        isHoleEnd_ = (holdInput_ <= grabEndThreshold) && (preHoldInput > grabEndThreshold);
+        releaseInput_ = Device.instance.GetRelease(side);
+        isHoldStart_ = holdInput_ == true;
+        isHoleEnd_ = releaseInput_ == true;
+        //isHoldStart_ = (holdInput_ >= grabBeginThreshold) && (preHoldInput < grabBeginThreshold);
+        //isHoleEnd_ = (holdInput_ <= grabEndThreshold) && (preHoldInput > grabEndThreshold);
     }
 
     void UpdateGrab()
@@ -274,7 +278,7 @@ public class VrgGrabber : MonoBehaviour
     void UpdateTouch()
     {
         var forward = gripTransform.forward;
-        
+
         var ray = new Ray();
         ray.origin = gripTransform.position;
         ray.direction = Vector3.Lerp(preRayDirection_, forward, 0.25f);
