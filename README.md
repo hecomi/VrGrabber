@@ -1,21 +1,21 @@
 VrGrabberGo
 =========
 
-**VrGrabberGo** is a Unity components for Oculus Go.
+**VrGrabberGo** is a Unity components for Oculus Go or Gear VR.
+VrGrabberGo is the mod of hecomi's VrGrabber.
 
--   interaction (currently move only)
+-   Grab and release by trigger button
 -   Z-distance control by touch pad
 
 
-![VrGrabber Image 1](https://raw.githubusercontent.com/wiki/hecomi/VrGrabber/grabber1.PNG)
-![VrGrabber Image 2](https://raw.githubusercontent.com/wiki/hecomi/VrGrabber/grabber2.PNG)
-![VrGrabber Image 3](https://raw.githubusercontent.com/wiki/hecomi/VrGrabber/grabber3.PNG)
+![VrGrabberGo Image 1](https://ryokosaka.github.io/image/vrgrabbergo/vrgrabbergo1.jpg)
+![VrGrabberGo Image 2](https://ryokosaka.github.io/image/vrgrabbergo/vrgrabbergo2.jpg)
 
 
 Demo
 ----
 
--   [https://www.youtube.com/watch?v=x-NaOaJp0xc](https://www.youtube.com/watch?v=x-NaOaJp0xc)
+-   [https://www.youtube.com/watch?v=SR686aPVT1Q](https://www.youtube.com/watch?v=SR686aPVT1Q)
 
 Setup
 -------
